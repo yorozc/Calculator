@@ -1,1 +1,2 @@
-# Calculator
+# Calculator 
+- will have basic arithmetic functions
