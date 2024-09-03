@@ -43,6 +43,10 @@ button{
     
 }
 
+.numbers#zero{
+    width: 204px;
+}
+
 .button-container{
     background-color: black;
 }
