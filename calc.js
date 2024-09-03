@@ -19,6 +19,8 @@ function divide(num1, num2){
     return num1 / num2;
 }
 
+
+
 function operate(num1, num2, operator){
     //have switch statement to check which operator it is
 }
