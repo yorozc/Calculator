@@ -2,7 +2,7 @@ let num1, num2, operator;
 let num1flag = true; 
 let num2flag = false;
 let opflag = false;
-let selectedButton = null;
+let prevOp = null;
 const numDisplay = document.getElementById("display"); 
 
 //will probably have to be a function
@@ -31,6 +31,8 @@ document.body.addEventListener('click', function(event){
                 opflag = true;
                 numDisplay.textContent = String(Number(num2));
             }
+            prevOp.style.backgroundColor = 'rgb(44 ,78, 128)';
+
         }
 
         if(event.target.classList.contains('operator')){
@@ -40,6 +42,17 @@ document.body.addEventListener('click', function(event){
             num1flag = false;
             num2flag = true;
             num2 = 0;
+            event.target.style.backgroundColor = 'white';
+
+            prevOp = event.target;
+            
+        }
+
+        if(event.target.classList.contains('equal')){
+            let result = operate(Number(num1), Number(num2), operator);
+            console.log(result);
+            
+            numDisplay.textContent = result;
         }
     }
 });
@@ -51,7 +64,9 @@ document.getElementById('clear').addEventListener('click', () =>{
     num1flag = true;
     num2flag = false;
     opflag = false;
-})
+    prevOp = 'null';
+});
+
 function add(num1, num2){
     return num1 + num2;
 }
@@ -72,4 +87,15 @@ function divide(num1, num2){
 
 function operate(num1, num2, operator){
     //have switch statement to check which operator it is
+
+    switch(operator){
+        case '+':
+            return add(num1, num2);
+        case '-':
+            return subtract(num1, num2);
+        case '*':
+            return multiply(num1, num2);
+        case '/':
+            return divide(num1, num2);
+    }
 }
