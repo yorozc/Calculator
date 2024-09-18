@@ -28,10 +28,16 @@ document.body.addEventListener('click', function(event){
             }else{
                 numDisplay.textContent = '';
                 num2 += event.target.value;
+                console.log("num2:" + num2);
                 opflag = true;
                 numDisplay.textContent = String(Number(num2));
             }
-            prevOp.style.backgroundColor = 'rgb(44 ,78, 128)';
+            if(prevOp.value === "%" || prevOp.value == "pos/neg"){
+                prevOp.style.backgroundColor = 'rgb(255, 197, 90)';
+            }else{
+                prevOp.style.backgroundColor = 'rgb(44 ,78, 128)';
+            }
+            
 
         }
 
@@ -43,17 +49,20 @@ document.body.addEventListener('click', function(event){
             num2flag = true;
             num2 = 0;
             event.target.style.backgroundColor = 'white';
-
             prevOp = event.target;
+            
             
         }
 
         if(event.target.classList.contains('equal')){
             let result = operate(Number(num1), Number(num2), operator);
-            console.log(result);
-            
+            console.log("result:" + result);
+            num1 = result;
+            num2 = 0;
+            opflag = false;
             numDisplay.textContent = result;
         }
+
     }
 });
 
@@ -64,7 +73,13 @@ document.getElementById('clear').addEventListener('click', () =>{
     num1flag = true;
     num2flag = false;
     opflag = false;
+    if(prevOp.value === "%" || prevOp.value == "pos/neg"){
+        prevOp.style.backgroundColor = 'rgb(255, 197, 90)';
+    }else{
+        prevOp.style.backgroundColor = 'rgb(44 ,78, 128)';
+    }
     prevOp = 'null';
+    
 });
 
 function add(num1, num2){
@@ -85,6 +100,7 @@ function divide(num1, num2){
 
 
 
+
 function operate(num1, num2, operator){
     //have switch statement to check which operator it is
 
@@ -97,5 +113,7 @@ function operate(num1, num2, operator){
             return multiply(num1, num2);
         case '/':
             return divide(num1, num2);
+        case '%': 
+            return num1 % num2;
     }
 }
