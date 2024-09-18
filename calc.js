@@ -15,11 +15,8 @@ document.body.addEventListener('click', function(event){
             if(numDisplay.textContent === '0'){
                 numDisplay.textContent = '';
             }
-
             num1 += event.target.value;    
-
             console.log("num1:" + num1);
-
             numDisplay.textContent += event.target.value;
         
         } 
@@ -28,16 +25,13 @@ document.body.addEventListener('click', function(event){
             if(opflag){
                 num2 += event.target.value;
                 console.log("Opflag Num2: " + num2);
-
                 numDisplay.textContent += event.target.value; 
 
             }else{
                 numDisplay.textContent = '';
                 num2 += event.target.value;
                 console.log("num2:" + num2);
-
                 opflag = true;
-                
                 numDisplay.textContent = String(Number(num2));
             }
             if(prevOp.value === "%" || prevOp.value == "pos/neg"){
