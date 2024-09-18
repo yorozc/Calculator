@@ -15,25 +15,44 @@ document.body.addEventListener('click', function(event){
             if(numDisplay.textContent === '0'){
                 numDisplay.textContent = '';
             }
-            num1 += event.target.value;    
-            console.log("num1:" + num1);
-            numDisplay.textContent += event.target.value;
-        
+
+            //stops user from pressing decimal after pressing it once
+            if(event.target.value === "."){
+                if(!num1.includes('.')){
+                    num1 += event.target.value;    
+                    console.log("num1:" + num1);
+                    numDisplay.textContent += event.target.value;
+                }
+            }else {
+                num1 += event.target.value;    
+                numDisplay.textContent += event.target.value;
+            }
         } 
         
         if(event.target.classList.contains('numbers') && num2flag){
             if(opflag){
-                num2 += event.target.value;
-                console.log("Opflag Num2: " + num2);
-                numDisplay.textContent += event.target.value; 
+
+                //checks if number contains decimal so it wont allow user to press again
+                if(event.target.value === "."){
+                    if(!num2.includes('.')){
+                        num2 += event.target.value;    
+                        console.log("num2:" + num2);
+                        numDisplay.textContent += event.target.value;
+                    }
+
+                }else{
+                    num2 += event.target.value;    
+                    numDisplay.textContent += event.target.value;
+                }
 
             }else{
                 numDisplay.textContent = '';
                 num2 += event.target.value;
                 console.log("num2:" + num2);
                 opflag = true;
-                numDisplay.textContent = String(Number(num2));
+                numDisplay.textContent = num2;
             }
+            //changes button color back once an operation is pressed
             if(prevOp.value === "%" || prevOp.value == "pos/neg"){
                 prevOp.style.backgroundColor = 'rgb(255, 197, 90)';
             }else{
